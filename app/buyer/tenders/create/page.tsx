@@ -40,7 +40,7 @@ export default function CreateTenderPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       <div className="container mx-auto px-4 py-8">
         <Link href="/buyer/dashboard">
           <Button variant="ghost" className="mb-4">
@@ -49,7 +49,7 @@ export default function CreateTenderPage() {
           </Button>
         </Link>
 
-        <Card className="max-w-3xl mx-auto">
+        <Card className="max-w-3xl mx-auto bg-white border border-gray-200 rounded-xl">
           <CardHeader>
             <div className="flex items-center gap-2">
               <FileText className="h-6 w-6 text-primary" />

@@ -25,14 +25,14 @@ function LoginForm() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center p-4">
-      <Card className="w-full max-w-md">
+    <div className="min-h-screen bg-white flex items-center justify-center p-4">
+      <Card className="w-full max-w-md bg-white border border-gray-200 rounded-xl">
         <CardHeader className="space-y-1 text-center">
           <div className="flex justify-center mb-4">
             <FileText className="h-12 w-12 text-primary" />
           </div>
-          <CardTitle className="text-2xl font-bold">Welcome to ProcureAI</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-2xl font-bold text-gray-900">Welcome to ProcureAI</CardTitle>
+          <CardDescription className="text-gray-600">
             Sign in to your account to continue
           </CardDescription>
         </CardHeader>
@@ -50,15 +50,15 @@ function LoginForm() {
             </TabsList>
             <TabsContent value="buyer" className="space-y-4 mt-4">
               <div className="space-y-2">
-                <Label htmlFor="buyer-email">Email</Label>
-                <Input id="buyer-email" type="email" placeholder="buyer@example.com" />
+                <Label htmlFor="buyer-email" className="text-gray-900">Email</Label>
+                <Input id="buyer-email" type="email" placeholder="buyer@example.com" className="bg-white border-gray-300 text-gray-900" />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="buyer-password">Password</Label>
-                <Input id="buyer-password" type="password" placeholder="••••••••" />
+                <Label htmlFor="buyer-password" className="text-gray-900">Password</Label>
+                <Input id="buyer-password" type="password" placeholder="••••••••" className="bg-white border-gray-300 text-gray-900" />
               </div>
               <Button 
-                className="w-full" 
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground" 
                 onClick={() => handleLogin("buyer")}
               >
                 Login as Buyer
@@ -66,15 +66,15 @@ function LoginForm() {
             </TabsContent>
             <TabsContent value="supplier" className="space-y-4 mt-4">
               <div className="space-y-2">
-                <Label htmlFor="supplier-email">Email</Label>
-                <Input id="supplier-email" type="email" placeholder="supplier@example.com" />
+                <Label htmlFor="supplier-email" className="text-gray-900">Email</Label>
+                <Input id="supplier-email" type="email" placeholder="supplier@example.com" className="bg-white border-gray-300 text-gray-900" />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="supplier-password">Password</Label>
-                <Input id="supplier-password" type="password" placeholder="••••••••" />
+                <Label htmlFor="supplier-password" className="text-gray-900">Password</Label>
+                <Input id="supplier-password" type="password" placeholder="••••••••" className="bg-white border-gray-300 text-gray-900" />
               </div>
               <Button 
-                className="w-full" 
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground" 
                 onClick={() => handleLogin("supplier")}
               >
                 Login as Supplier

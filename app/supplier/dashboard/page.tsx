@@ -71,9 +71,9 @@ export default function SupplierDashboard() {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="bg-white border-b sticky top-0 z-50">
+      <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <FileText className="h-6 w-6 text-primary" />
@@ -165,7 +165,7 @@ export default function SupplierDashboard() {
                   {myBids.map((bid) => (
                     <div
                       key={bid.id}
-                      className="border rounded-lg p-6 hover:bg-gray-50 transition-colors"
+                      className="border border-gray-200 rounded-xl p-6 hover:bg-gray-50 transition-colors bg-white"
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex-1">

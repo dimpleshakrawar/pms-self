@@ -51,7 +51,7 @@ export default function TenderDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       <div className="container mx-auto px-4 py-8">
         <Link href="/buyer/tenders">
           <Button variant="ghost" className="mb-4">

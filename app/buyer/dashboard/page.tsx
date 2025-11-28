@@ -59,20 +59,20 @@ export default function BuyerDashboard() {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="bg-white border-b sticky top-0 z-50">
+      <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <FileText className="h-6 w-6 text-primary" />
-            <span className="text-xl font-bold">ProcureAI - Buyer Dashboard</span>
+            <span className="text-xl font-bold text-gray-900">ProcureAI</span>
+            <span className="text-lg text-gray-600 ml-4">Buyer Dashboard</span>
           </div>
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="sm">
+            <Button variant="ghost" size="sm" className="text-gray-700 hover:bg-gray-100">
               <MessageSquare className="h-4 w-4 mr-2" />
               Chatbot
             </Button>
-            <Button variant="ghost" size="sm" onClick={() => router.push("/")}>
+            <Button variant="ghost" size="sm" onClick={() => router.push("/")} className="text-gray-700 hover:bg-gray-100">
               <LogOut className="h-4 w-4 mr-2" />
               Logout
             </Button>
@@ -83,40 +83,40 @@ export default function BuyerDashboard() {
       <div className="container mx-auto px-4 py-8">
         {/* Stats Cards */}
         <div className="grid md:grid-cols-4 gap-4 mb-8">
-          <Card>
+          <Card className="bg-gray-800 border-0 rounded-xl">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Active Tenders</CardTitle>
-              <FileText className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium text-white">Active Tenders</CardTitle>
+              <FileText className="h-4 w-4 text-primary" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats.activeTenders}</div>
+              <div className="text-2xl font-bold text-white">{stats.activeTenders}</div>
             </CardContent>
           </Card>
-          <Card>
+          <Card className="bg-gray-800 border-0 rounded-xl">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Total Bids</CardTitle>
-              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium text-white">Total Bids</CardTitle>
+              <TrendingUp className="h-4 w-4 text-primary" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats.totalBids}</div>
+              <div className="text-2xl font-bold text-white">{stats.totalBids}</div>
             </CardContent>
           </Card>
-          <Card>
+          <Card className="bg-gray-800 border-0 rounded-xl">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Pending Review</CardTitle>
-              <Clock className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium text-white">Pending Review</CardTitle>
+              <Clock className="h-4 w-4 text-primary" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats.pendingReview}</div>
+              <div className="text-2xl font-bold text-white">{stats.pendingReview}</div>
             </CardContent>
           </Card>
-          <Card>
+          <Card className="bg-gray-800 border-0 rounded-xl">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Completed</CardTitle>
-              <CheckCircle2 className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium text-white">Completed</CardTitle>
+              <CheckCircle2 className="h-4 w-4 text-primary" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats.completed}</div>
+              <div className="text-2xl font-bold text-white">{stats.completed}</div>
             </CardContent>
           </Card>
         </div>
@@ -124,7 +124,7 @@ export default function BuyerDashboard() {
         {/* Quick Actions */}
         <div className="mb-8">
           <Link href="/buyer/tenders/create">
-            <Button size="lg" className="w-full md:w-auto">
+            <Button size="lg" className="w-full md:w-auto bg-primary hover:bg-primary/90 text-primary-foreground">
               <Plus className="h-5 w-5 mr-2" />
               Create New Tender
             </Button>
@@ -141,37 +141,37 @@ export default function BuyerDashboard() {
           </TabsList>
 
           <TabsContent value="overview" className="mt-6">
-            <Card>
+            <Card className="bg-white border border-gray-200 rounded-xl">
               <CardHeader>
-                <CardTitle>Recent Tenders</CardTitle>
-                <CardDescription>Your latest tender activities</CardDescription>
+                <CardTitle className="text-gray-900">Recent Tenders</CardTitle>
+                <CardDescription className="text-gray-600">Your latest tender activities</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   {recentTenders.map((tender) => (
                     <div
                       key={tender.id}
-                      className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 cursor-pointer"
+                      className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer bg-white"
                       onClick={() => router.push(`/buyer/tenders/${tender.id}`)}
                     >
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2">
-                          <h3 className="font-semibold">{tender.title}</h3>
+                          <h3 className="font-semibold text-gray-900">{tender.title}</h3>
                           <Badge variant={tender.status === "active" ? "default" : "secondary"}>
                             {tender.status}
                           </Badge>
                         </div>
-                        <div className="text-sm text-muted-foreground">
+                        <div className="text-sm text-gray-600">
                           <span>ID: {tender.id}</span> • <span>{tender.bids} bids</span> • 
                           <span> Deadline: {tender.deadline}</span>
                         </div>
                         {tender.l1Bidder && (
-                          <div className="text-sm text-green-600 mt-1">
+                          <div className="text-sm text-primary font-medium mt-1">
                             L1: {tender.l1Bidder}
                           </div>
                         )}
                       </div>
-                      <Button variant="outline" size="sm">
+                      <Button variant="outline" size="sm" className="border-gray-300 text-gray-700 hover:bg-gray-50">
                         View Details
                       </Button>
                     </div>

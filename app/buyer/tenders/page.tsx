@@ -55,7 +55,7 @@ export default function TendersPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       <div className="container mx-auto px-4 py-8">
         <Link href="/buyer/dashboard">
           <Button variant="ghost" className="mb-4">
@@ -91,7 +91,7 @@ export default function TendersPage() {
               {tenders.map((tender) => (
                 <div
                   key={tender.id}
-                  className="border rounded-lg p-6 hover:bg-gray-50 transition-colors"
+                  className="border border-gray-200 rounded-xl p-6 hover:bg-gray-50 transition-colors bg-white"
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
