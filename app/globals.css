@@ -46,6 +46,10 @@
   --input: 0 0% 90%;
   --ring: 217 91% 60%;
   --radius: 0.5rem;
+  --purple-brand:#d893ee;
+  --blue-brand:#7474ff;
+  --light-blue-brand:#f8f8f8;
+  --purple-text-brand:#8a77c8;
 }
 
 body {

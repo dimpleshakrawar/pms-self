@@ -1,35 +1,43 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { 
-  Plus, 
-  FileText, 
-  TrendingUp, 
-  Clock, 
-  CheckCircle2, 
-  AlertCircle,
+import {
+  Plus,
+  FileText,
   MessageSquare,
   LogOut,
   BarChart3
 } from "lucide-react"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
 
 export default function BuyerDashboard() {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState("overview")
 
   // Mock data
-  const stats = {
-    activeTenders: 5,
-    totalBids: 23,
-    pendingReview: 8,
-    completed: 12
-  }
+  const stats = [
+    {
+      key: 1,
+      label: "Active Tenders",
+      value: 5,
+    }, {
+      key: 2,
+      label: "Total Bids",
+      value: 42,
+    }, {
+      key: 3,
+      label: "Pending Reviews",
+      value: 8,
+    }, {
+      key: 4,
+      label: "Completed",
+      value: 15,
+    }]
 
   const recentTenders = [
     {
@@ -82,103 +90,73 @@ export default function BuyerDashboard() {
 
       <div className="container mx-auto px-4 py-8">
         {/* Stats Cards */}
-        <div className="grid md:grid-cols-4 gap-4 mb-8">
-          <Card className="bg-gray-800 border-0 rounded-xl">
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-white">Active Tenders</CardTitle>
-              <FileText className="h-4 w-4 text-primary" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-white">{stats.activeTenders}</div>
-            </CardContent>
-          </Card>
-          <Card className="bg-gray-800 border-0 rounded-xl">
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-white">Total Bids</CardTitle>
-              <TrendingUp className="h-4 w-4 text-primary" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-white">{stats.totalBids}</div>
-            </CardContent>
-          </Card>
-          <Card className="bg-gray-800 border-0 rounded-xl">
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-white">Pending Review</CardTitle>
-              <Clock className="h-4 w-4 text-primary" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-white">{stats.pendingReview}</div>
-            </CardContent>
-          </Card>
-          <Card className="bg-gray-800 border-0 rounded-xl">
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-white">Completed</CardTitle>
-              <CheckCircle2 className="h-4 w-4 text-primary" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-white">{stats.completed}</div>
-            </CardContent>
-          </Card>
-        </div>
 
-        {/* Quick Actions */}
-        <div className="mb-8">
-          <Link href="/buyer/tenders/create">
-            <Button size="lg" className="w-full md:w-auto bg-primary hover:bg-primary/90 text-primary-foreground">
-              <Plus className="h-5 w-5 mr-2" />
-              Create New Tender
-            </Button>
-          </Link>
+        <div className="grid md:grid-cols-4 gap-4 mb-8">
+          {stats?.map((stats) => (
+            <Card className="bg-[var(--light-blue-brand)]  border-0 rounded-xl">
+              {/* <Card className="bg-linear-to-r from-[var(--purple-brand)] to-[var(--blue-brand)] border-0 rounded-xl"> */}
+              <CardHeader className="flex flex-row items-center justify-between pb-2">
+                <CardTitle className="text-sm font-medium text-black">{stats.label}</CardTitle>
+                <FileText className="h-4 w-4 text-primary" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold text-[var(--purple-text-brand)]">{stats.value}</div>
+              </CardContent>
+            </Card>
+          ))}
         </div>
 
         {/* Main Content Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList>
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="tenders">My Tenders</TabsTrigger>
-            <TabsTrigger value="comparisons">AI Comparisons</TabsTrigger>
-            <TabsTrigger value="audit">Audit Logs</TabsTrigger>
-          </TabsList>
+          <div className="flex justify-between items-center">
+            <TabsList className="rounded-full">
+              <TabsTrigger value="overview" className={` ${activeTab == "overview" && "bg-linear-to-r from-[var(--purple-brand)] to-[var(--blue-brand)] !text-white rounded-full"} `}>Overview</TabsTrigger>
+              <TabsTrigger value="tenders" className={` ${activeTab == "tenders" && "bg-linear-to-r from-[var(--purple-brand)] to-[var(--blue-brand)] !text-white rounded-full"} `}>My Tenders</TabsTrigger>
+              <TabsTrigger value="comparisons" className={` ${activeTab == "comparisons" && "bg-linear-to-r from-[var(--purple-brand)] to-[var(--blue-brand)] !text-white rounded-full"} `} >AI Comparisons</TabsTrigger>
+              <TabsTrigger value="audit" className={` ${activeTab == "audit" && "bg-linear-to-r from-[var(--purple-brand)] to-[var(--blue-brand)] !text-white rounded-full"} `}>Audit Logs</TabsTrigger>
+            </TabsList>
+
+            <Button onClick={() => router.push('/buyer/tenders/create')} size="lg" className="px-4 rounded-lg w-full md:w-auto bg-linear-to-r from-[var(--purple-brand)] to-[var(--blue-brand)] text-white">
+              <Plus className="h-5 w-5" />
+              Create New Tender
+            </Button>
+          </div>
 
           <TabsContent value="overview" className="mt-6">
-            <Card className="bg-white border border-gray-200 rounded-xl">
-              <CardHeader>
-                <CardTitle className="text-gray-900">Recent Tenders</CardTitle>
-                <CardDescription className="text-gray-600">Your latest tender activities</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {recentTenders.map((tender) => (
-                    <div
-                      key={tender.id}
-                      className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer bg-white"
-                      onClick={() => router.push(`/buyer/tenders/${tender.id}`)}
-                    >
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <h3 className="font-semibold text-gray-900">{tender.title}</h3>
-                          <Badge variant={tender.status === "active" ? "default" : "secondary"}>
-                            {tender.status}
-                          </Badge>
-                        </div>
-                        <div className="text-sm text-gray-600">
-                          <span>ID: {tender.id}</span> • <span>{tender.bids} bids</span> • 
-                          <span> Deadline: {tender.deadline}</span>
-                        </div>
-                        {tender.l1Bidder && (
-                          <div className="text-sm text-primary font-medium mt-1">
-                            L1: {tender.l1Bidder}
-                          </div>
-                        )}
-                      </div>
-                      <Button variant="outline" size="sm" className="border-gray-300 text-gray-700 hover:bg-gray-50">
-                        View Details
-                      </Button>
+
+            <h2 className="text-gray-900">Recent Tenders</h2>
+            <h5 className="text-gray-600 mb-3">Your latest tender activities</h5>
+
+            <div className="flex gap-6 justify-between">
+              {recentTenders.map((tender) => (
+                <div
+                  key={tender.id}
+                  className="w-1/3 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer bg-white"
+                  onClick={() => router.push(`/buyer/tenders/${tender.id}`)}
+                >
+                  <div className="flex-1 mb-10">
+                    <Badge className="mb-2" variant={tender.status === "active" ? "default" : "secondary"}>
+                      {tender.status}
+                    </Badge>
+                    <div className="flex items-center gap-2 mb-2">
+                      <h3 className="font-semibold text-gray-900">{tender.title}</h3>
                     </div>
-                  ))}
+                    <div className="text-sm text-gray-600">
+                      <p>ID: {tender.id}</p> <span>{tender.bids} bids</span>
+                      <p> Deadline: {tender.deadline}</p>
+                    </div>
+                    {tender.l1Bidder && (
+                      <div className="text-sm text-primary font-medium mt-1">
+                        L1: {tender.l1Bidder}
+                      </div>
+                    )}
+                  </div>
+                  <Button variant="outline" size="sm" className="border-gray-300 text-gray-700 hover:bg-gray-50">
+                    View Details
+                  </Button>
                 </div>
-              </CardContent>
-            </Card>
+              ))}
+            </div>
           </TabsContent>
 
           <TabsContent value="tenders" className="mt-6">
