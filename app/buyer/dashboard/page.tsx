@@ -136,7 +136,7 @@ export default function BuyerDashboard() {
                 >
                   <div className="flex-1 mb-10">
                     <Badge className="mb-2" variant={tender.status === "active" ? "default" : "secondary"}>
-                      {tender.status}
+                      {tender?.status?.charAt(0).toUpperCase() + tender.status.slice(1)}
                     </Badge>
                     <div className="flex items-center gap-2 mb-2">
                       <h3 className="font-semibold text-gray-900">{tender.title}</h3>
@@ -160,19 +160,15 @@ export default function BuyerDashboard() {
           </TabsContent>
 
           <TabsContent value="tenders" className="mt-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>All Tenders</CardTitle>
-                <CardDescription>Manage all your tenders</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Link href="/buyer/tenders">
-                  <Button variant="outline" className="w-full">
-                    View All Tenders
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
+            <h3 className="text-gray-900">All Tenders</h3>
+            <h4 className="text-gray-600 mb-3">Manage all your tenders</h4>
+            <CardContent>
+              <Link href="/buyer/tenders">
+                <Button variant="outline" className="w-full">
+                  View All Tenders
+                </Button>
+              </Link>
+            </CardContent>
           </TabsContent>
 
           <TabsContent value="comparisons" className="mt-6">
