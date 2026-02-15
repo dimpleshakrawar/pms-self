@@ -8,19 +8,46 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { MessageSquare, Github, Chrome } from "lucide-react"
+import { apiFetch } from "@/lib/fetcher"
+import { toast } from "sonner"
 
 export default function SignupPage() {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
+    const [formData, setFormData] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+    })
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         setIsLoading(true)
-        // Simulate signup
-        setTimeout(() => {
-            setIsLoading(false)
-            router.push("/chat")
-        }, 1500)
+        try {
+            // const response = await fetch("/api/auth/signin", )
+            const response: any = await apiFetch("/api/auth/signin", {
+                method: "POST",
+                body: JSON.stringify({ email: formData?.email, password: formData?.password, name: `${formData.firstName} ${formData.lastName}` }),
+            });
+
+            console.log(response, "response ===> ")
+
+            if (response.success) {
+                toast.success(response.message || "Account created successfully!")
+                router.push("/chat")
+            } else {
+                toast.error(response.error || "Failed to create account. Please try again.")
+            }
+
+        } catch (err: any) {
+            console.log("Error while signing up:", err);
+            return toast.error(err?.message || "Failed to create account. Please try again.")
+        }
+    }
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
     return (
@@ -49,20 +76,24 @@ export default function SignupPage() {
                                 <Label htmlFor="first-name" className="text-gray-300">First Name</Label>
                                 <Input
                                     id="first-name"
+                                    name="firstName"
                                     placeholder="John"
                                     required
                                     className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-primary/50 transition-colors"
                                     disabled={isLoading}
+                                    onChange={handleChange}
                                 />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="last-name" className="text-gray-300">Last Name</Label>
                                 <Input
                                     id="last-name"
+                                    name="lastName"
                                     placeholder="Doe"
                                     required
                                     className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-primary/50 transition-colors"
                                     disabled={isLoading}
+                                    onChange={handleChange}
                                 />
                             </div>
                         </div>
@@ -71,7 +102,9 @@ export default function SignupPage() {
                             <Input
                                 id="email"
                                 type="email"
+                                name="email"
                                 placeholder="name@example.com"
+                                onChange={handleChange}
                                 required
                                 className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-primary/50 transition-colors"
                                 disabled={isLoading}
@@ -82,6 +115,8 @@ export default function SignupPage() {
                             <Input
                                 id="password"
                                 type="password"
+                                name="password"
+                                onChange={handleChange}
                                 placeholder="••••••••"
                                 required
                                 className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-primary/50 transition-colors"
